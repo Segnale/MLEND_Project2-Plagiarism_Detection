@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 
 
-## TODO: Complete this classifier
+## Done: Complete this classifier
 class BinaryClassifier(nn.Module):
     """
     Define a neural network that performs binary classification.
@@ -12,10 +12,10 @@ class BinaryClassifier(nn.Module):
     
     Notes on training:
     To train a binary classifier in PyTorch, use BCELoss.
-    BCELoss is binary cross entropy loss, documentation: https://pytorch.org/docs/stable/nn.html#torch.nn.BCELoss
+    BCELoss is binary cross entropy loss, documentation: https://pytorch.org/docs/stable/nn.html#torch.nn.
     """
-
-    ## TODO: Define the init function, the input params are required (for loading code in train.py to work)
+    
+    ## Done: Define the init function, the input params are required (for loading code in train.py to work)
     def __init__(self, input_features, hidden_dim, output_dim):
         """
         Initialize the model by setting up linear layers.
@@ -27,10 +27,13 @@ class BinaryClassifier(nn.Module):
         super(BinaryClassifier, self).__init__()
 
         # define any initial layers, here
-        
+        self.layer1 = nn.Linear(in_features=input_features, out_features =hidden_dim)
+        self.layer2 = nn.Linear(in_features=hidden_dim, out_features =output_dim)
+        self.layer3 = nn.Linear(in_features=output_dim, out_features=1)
+        self.sig = nn.Sigmoid()
 
     
-    ## TODO: Define the feedforward behavior of the network
+    ## Done: Define the feedforward behavior of the network
     def forward(self, x):
         """
         Perform a forward pass of our model on input features, x.
@@ -39,6 +42,12 @@ class BinaryClassifier(nn.Module):
         """
         
         # define the feedforward behavior
+        batch_size = x[0,:]
+        input_features = x[1:,:]
         
-        return x
+        l1 = self.layer1(input_features)
+        l2 = self.layer2(l1)
+        out = self.dense(l2)
+        
+        return self.sig(out.squeeze())
     
