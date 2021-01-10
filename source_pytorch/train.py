@@ -104,7 +104,7 @@ if __name__ == '__main__':
     # Do not need to change
     parser.add_argument('--output-data-dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])
     parser.add_argument('--model-dir', type=str, default=os.environ['SM_MODEL_DIR'])
-    parser.add_argument('--data-dir', type=str, default=os.environ['SM_CHANNEL_TRAIN'])
+    parser.add_argument('--data-dir', type=str, default=os.environ['SM_CHANNEL_TRAINING'])
     
     # Training Parameters, given
     parser.add_argument('--batch-size', type=int, default=10, metavar='N',
@@ -120,8 +120,8 @@ if __name__ == '__main__':
                         help='size of the input_features (default: 3)')
     parser.add_argument('--hidden_dim', type=int, default=25, metavar='N',
                         help='size of the hidden dimension (default: 25)')
-    parser.add_argument('--output_dim', type=int, default=10, metavar='N',
-                        help='size of the output_dim (default: 10)')
+    parser.add_argument('--output_dim', type=int, default=5, metavar='N',
+                        help='size of the output_dim (default: 5)')
     
     # args holds all passed-in arguments
     args = parser.parse_args()

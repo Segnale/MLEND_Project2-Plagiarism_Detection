@@ -42,12 +42,9 @@ class BinaryClassifier(nn.Module):
         """
         
         # define the feedforward behavior
-        batch_size = x[0,:]
-        input_features = x[1:,:]
-        
-        l1 = self.layer1(input_features)
+        l1 = self.layer1(x)
         l2 = self.layer2(l1)
-        out = self.dense(l2)
+        out = self.layer3(l2)
         
         return self.sig(out.squeeze())
     
